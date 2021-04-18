@@ -1,0 +1,23 @@
+plugins {
+    id 'java'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+    implementation 'org.knowm.xchange:xchange-stream-core:5.0.7'
+    implementation 'org.knowm.xchange:xchange-stream-binance:5.0.7'
+    implementation 'org.knowm.xchange:xchange-examples:5.0.7'
+    implementation 'net.openhft:chronicle:3.6.4'
+}
+
+test {
+    useJUnitPlatform()
+}
