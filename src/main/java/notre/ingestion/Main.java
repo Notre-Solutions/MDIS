@@ -8,19 +8,17 @@ import info.bitrich.xchangestream.binance.BinanceStreamingExchange;
 import io.reactivex.disposables.Disposable;
 
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
+
+import org.knowm.xchange.binance.service.BinanceMarketDataServiceRaw;
 
 import net.openhft.chronicle.Chronicle;
 import net.openhft.chronicle.ExcerptAppender;
 import org.knowm.xchange.ExchangeSpecification;
 import org.knowm.xchange.currency.CurrencyPair;
-import org.knowm.xchange.dto.Order;
 import org.knowm.xchange.dto.marketdata.Trade;
-import org.knowm.xchange.instrument.Instrument;
 
 public class Main {
     private final static Logger LOG = Logger.getLogger(Main.class.getName());
@@ -41,7 +39,7 @@ public class Main {
         m.listOfDisposables.add(tradesBtc);
         // We live subscribe a new currency pair to the trades update
         m.listOfDisposables.add(m.addToStream(CurrencyPair.ETH_BTC, BinanceSubscriptionType.TRADE));
-        Thread.sleep(5000);
+        Thread.sleep(60000);
         for(Disposable d : m.listOfDisposables){
             d.dispose();
             LOG.info("Disposed of "+d.toString());
@@ -59,7 +57,9 @@ public class Main {
     }
 
     public void processTradeData(Trade trade) throws IOException {
-        appender.writeUTF(trade.getId());
+        appender.startExcerpt();
+        String id = trade.getId();
+        appender.writeUTF(id);
         appender.writeUTF(trade.getInstrument().toString());
         appender.writeUTF(trade.getType().name());
         if(trade.getMakerOrderId() != null){

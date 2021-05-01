@@ -4,11 +4,6 @@ import net.openhft.chronicle.Chronicle;
 import net.openhft.chronicle.ChronicleQueueBuilder;
 import net.openhft.chronicle.ExcerptAppender;
 import net.openhft.chronicle.ExcerptTailer;
-import org.checkerframework.checker.units.qual.C;
-
-import java.net.URI;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.logging.Logger;
@@ -18,7 +13,7 @@ import java.nio.file.Files;
 
 public class ChronicleQueueLauncher {
     NotreLogger LOG = new NotreLogger(ChronicleQueueLauncher.class.getName());
-    String rootPath = "C:\\Users\\Nyasha\\IdeaProjects\\MDIS\\src\\main\\resources\\chronicle-queues";
+    String rootPath = "C:\\dev\\notre-solutions\\MDIS\\src\\main\\resources\\chronicle-queues";
     public static void main(String[] args) throws IOException {
 
         ChronicleQueueLauncher launcher = new ChronicleQueueLauncher();
